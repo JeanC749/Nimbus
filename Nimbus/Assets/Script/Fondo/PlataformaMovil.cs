@@ -4,32 +4,48 @@ using UnityEngine;
 
 public class PlataformaMovil : MonoBehaviour
 {
-    public GameObject ObjetoAmover;
-    public Transform StartPoint;
-    public Transform EndPoint;
+    [SerializeField] private Transform[] puntosMovimiento;
+    [SerializeField] private float velocidadMovimiento;
 
-    public float Velocidad;
-    private Vector3 MoverHacia;
+    private int siguientePlataforma = 1;
+    private bool ordenPlataformas = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        MoverHacia = EndPoint.position;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        ObjetoAmover.transform.position = Vector3.MoveTowards(ObjetoAmover.transform.position,MoverHacia,Velocidad * Time.deltaTime);
-
-        if(ObjetoAmover.transform.position == EndPoint.position)
+        if (ordenPlataformas && siguientePlataforma + 1 >= puntosMovimiento.Length)
         {
-            MoverHacia = StartPoint.position;
+            ordenPlataformas = false;
         }
 
-        if (ObjetoAmover.transform.position == StartPoint.position)
+        if (!ordenPlataformas && siguientePlataforma <= 0)
         {
-            MoverHacia = EndPoint.position;
+            ordenPlataformas = true;
         }
+
+        if (siguientePlataforma < puntosMovimiento.Length && Vector2.Distance(transform.position, puntosMovimiento[siguientePlataforma].position) < 0.1f)
+        {
+            if (ordenPlataformas)
+            {
+                siguientePlataforma += 1;
+            }
+            else
+            {
+                siguientePlataforma -= 1;
+            }
+        }
+
+        if (siguientePlataforma < puntosMovimiento.Length)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, puntosMovimiento[siguientePlataforma].position,
+            velocidadMovimiento * Time.deltaTime);
+        }
+        
     }
 }
