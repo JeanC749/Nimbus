@@ -3,35 +3,22 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : ControllerMovement
 {
-    [SerializeField] private float speedWalk = 5f, jumpForce = 12f, wallSlideSpeed = 2f,stamina = 100f;
+    [SerializeField] private float jumpForce = 12f, wallSlideSpeed = 2f, stamina = 100f;
     [SerializeField] private LayerMask groundLayer, wallLayer;
     [SerializeField] private Transform groundCheck, wallCheck;
-
-    private ControllerPlayerState controllerPlayerState;
-    private Rigidbody2D rb;
-    private float inputHor,inputVer,speedRun,speed;
-    private bool facingRight = true; // Saber si el personaje está mirando a la derecha
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        speedRun = speedWalk * 2;
-        controllerPlayerState = GetComponent<ControllerPlayerState>();
-    }
-
-    public void Stop(){
-        rb.velocity = Vector2.zero;
-    }
-
+    private float inputHor, inputVer;
     private void Update()
     {
         inputHor = Input.GetAxisRaw("Horizontal");
         inputVer = Input.GetAxisRaw("Vertical");
-        if(!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.E))
+        if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.E))
             SetStamina(0.5f);
-        Flip();
+        if (inputHor > 0 && !facingRight)
+            Flip(true);
+        else if (inputHor < 0 && facingRight)
+            Flip(false);
         Run();
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !Input.GetKey(KeyCode.E))
             Jump();
@@ -59,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, inputVer * speed);
             SetStamina(-0.5f);
-            controllerPlayerState.SetState(PlayerState.Climb);
         }
         else
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
@@ -67,23 +53,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ManagerState();
         Movement();
         if (IsTouchingWall())
             Climb();
-    }
-
-    private void Flip()
-    {
-        if (inputHor > 0 && !facingRight)
-        {
-            facingRight = true;
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        else if (inputHor < 0 && facingRight)
-        {
-            facingRight = false;
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
     }
 
     private void Jump()
@@ -109,14 +82,26 @@ public class PlayerMovement : MonoBehaviour
             speed = speedWalk;
     }
 
+
+    private void ManagerState()
+    {
+        if (IsGrounded())
+        {
+            if (inputHor == 0 && inputVer == 0)
+                controllerAnimState.SetState(AnimationStates.Idle);
+            else if (speed == speedRun)
+                controllerAnimState.SetState(AnimationStates.Run);
+            else if (inputHor != 0 && inputVer == 0)
+                controllerAnimState.SetState(AnimationStates.Walk);
+            else if (Input.GetKey(KeyCode.E) && IsTouchingWall())
+                controllerAnimState.SetState(AnimationStates.Climb);
+        }
+        else if (!IsGrounded() && !IsTouchingWall())
+            controllerAnimState.SetState(AnimationStates.Jump);
+    }
+
     private void Movement()
     {
-        if(inputHor == 0 && inputVer == 0)
-            controllerPlayerState.SetState(PlayerState.Idle);
-        else if (speed == speedRun)
-            controllerPlayerState.SetState(PlayerState.Run);
-        else
-            controllerPlayerState.SetState(PlayerState.Walk);
         rb.velocity = new Vector2(inputHor * speed, rb.velocity.y);
     }
 }

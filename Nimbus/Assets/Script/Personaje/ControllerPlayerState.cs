@@ -2,33 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerPlayerState : MonoBehaviour
+public class ControllerPlayerState : ControllerState
 {
-    private PlayerState state;
-    private Animator anim;
-
-    private void Awake()
-    {
-        state = PlayerState.Idle;
-        anim = GetComponent<Animator>();
-    }
-
-    public void SetState(PlayerState newState)
+    public override void SetState(AnimationStates newState)
     {
         if (state == newState)
             return;
         state = newState;
-        if(state == PlayerState.Walk)
+        if(state == AnimationStates.Walk)
             anim.SetTrigger("Walk");
-        else if(state == PlayerState.Run)
+        else if(state == AnimationStates.Run)
             anim.SetTrigger("Run");
-        else if(state == PlayerState.Jump)
+        else if(state == AnimationStates.Jump)
             anim.SetTrigger("Jump");
-        else if(state == PlayerState.Attack)
+        else if(state == AnimationStates.Attack)
             anim.SetTrigger("Attack");
-        else if(state == PlayerState.Dead)
+        else if(state == AnimationStates.Dead)
             anim.SetTrigger("Dead");
-        else if(state == PlayerState.Climb)
+        else if(state == AnimationStates.Climb)
             anim.SetTrigger("Climb");
         else
             anim.SetTrigger("Idle");

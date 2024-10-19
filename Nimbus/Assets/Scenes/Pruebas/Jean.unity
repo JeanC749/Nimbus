@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedWalk: 5
-  jumpForce: 1000
+  jumpForce: 400
   wallSlideSpeed: 2
   stamina: 100
   groundLayer:
