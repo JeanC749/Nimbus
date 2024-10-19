@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f152a4d641ad4af4cabcb35d8c7b6a17
+guid: 1db956aaa6dc6a548b301beadfdfeab7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprites_Goods_0
+      name: PlataformaMovil_2_0
       rect:
         serializedVersion: 2
         x: 7
-        y: 291
-        width: 49
-        height: 44
+        y: 415
+        width: 100
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,71 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eca3216e8216e614581254555bee42f6
-      internalID: 1769474386
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites_Goods_1
-      rect:
-        serializedVersion: 2
-        x: 57
-        y: 291
-        width: 50
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e4784df3b85e97540bea20d85dbaa891
-      internalID: -538700800
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites_Goods_2
-      rect:
-        serializedVersion: 2
-        x: 109
-        y: 291
-        width: 50
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c573a0648384e8743a242fb45a5f9ced
-      internalID: 1409501662
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprites_Goods_3
-      rect:
-        serializedVersion: 2
-        x: 161
-        y: 291
-        width: 49
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe93fe23460ea39489458e9ae0aabc02
-      internalID: 1653938601
+      spriteID: e59c5dc50b2579546a068e86c4fc0d08
+      internalID: 141251892
       vertices: []
       indices: 
       edges: []
@@ -204,10 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprites_Goods_0: 1769474386
-      sprites_Goods_1: -538700800
-      sprites_Goods_2: 1409501662
-      sprites_Goods_3: 1653938601
+      PlataformaMovil_2_0: 141251892
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
