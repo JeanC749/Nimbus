@@ -21,6 +21,10 @@ public class ControllerPlayerState : ControllerState
             anim.SetTrigger("Dead");
         else if(state == AnimationStates.Climb)
             anim.SetTrigger("Climb");
+        else if(state == AnimationStates.Fall)
+            anim.SetTrigger("Fall");
+        else if(state == AnimationStates.Hurt)
+            anim.SetTrigger("Hurt");
         else
             anim.SetTrigger("Idle");
     }

@@ -6,6 +6,8 @@ public enum AnimationStates
     Jump,
     Attack,
     Dead,
-    Climb
+    Climb,
+    Fall,
+    Hurt
 }
 
