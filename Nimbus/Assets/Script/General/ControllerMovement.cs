@@ -22,6 +22,11 @@ public class ControllerMovement : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
 
+    public void Disable(){
+        Stop();
+        this.enabled = false;
+    }
+
     protected virtual void Flip(bool value)
     {
         if (value && !facingRight)

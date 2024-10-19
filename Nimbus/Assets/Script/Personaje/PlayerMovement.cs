@@ -87,17 +87,19 @@ public class PlayerMovement : ControllerMovement
     {
         if (IsGrounded())
         {
-            if (inputHor == 0 && inputVer == 0)
-                controllerAnimState.SetState(AnimationStates.Idle);
+            if (Input.GetKey(KeyCode.Space))
+                controllerAnimState.SetState(AnimationStates.Jump);
             else if (speed == speedRun)
                 controllerAnimState.SetState(AnimationStates.Run);
             else if (inputHor != 0 && inputVer == 0)
                 controllerAnimState.SetState(AnimationStates.Walk);
-            else if (Input.GetKey(KeyCode.E) && IsTouchingWall())
-                controllerAnimState.SetState(AnimationStates.Climb);
+            else if (inputHor == 0 && inputVer == 0)
+                controllerAnimState.SetState(AnimationStates.Idle);
         }
-        else if (!IsGrounded() && !IsTouchingWall())
-            controllerAnimState.SetState(AnimationStates.Jump);
+        else if (!IsGrounded() && !IsTouchingWall() && rb.velocity.y < 0)
+            controllerAnimState.SetState(AnimationStates.Fall);
+        else if (IsTouchingWall())
+            controllerAnimState.SetState(AnimationStates.Climb);
     }
 
     private void Movement()
