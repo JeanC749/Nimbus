@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1db956aaa6dc6a548b301beadfdfeab7
+guid: b572b440401e9ae409c4eff37e368357
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,22 +110,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlataformaMovil_2_0
+      name: sprites_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 417
-        width: 97
-        height: 43
+        x: 210
+        y: 24
+        width: 50
+        height: 46
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e59c5dc50b2579546a068e86c4fc0d08
-      internalID: 141251892
+      spriteID: ef681537c0862e34eb65b53815df5427
+      internalID: -301129475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprites_1
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 24
+        width: 50
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e293da28662d744a833457877c8b8b5
+      internalID: 53595118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprites_2
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 24
+        width: 50
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3e450d275296a142b0b6fd09fe8b0fe
+      internalID: -1320359401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprites_3
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 24
+        width: 50
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c51a13ec6d14b44bb7cec2c88927ac2
+      internalID: 654484015
       vertices: []
       indices: 
       edges: []
@@ -141,7 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlataformaMovil_2_0: 141251892
+      sprites_0: -301129475
+      sprites_1: 53595118
+      sprites_2: -1320359401
+      sprites_3: 654484015
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

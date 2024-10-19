@@ -113,12 +113,12 @@ TextureImporter:
       name: PlataformaMovil_1_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 239
-        width: 149
-        height: 47
+        x: 8
+        y: 241
+        width: 146
+        height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

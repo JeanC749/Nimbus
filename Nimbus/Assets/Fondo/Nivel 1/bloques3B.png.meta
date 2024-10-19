@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1db956aaa6dc6a548b301beadfdfeab7
+guid: ba5e85a05fd3bbe4aaa27ab1b71a37ae
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlataformaMovil_2_0
+      name: bloques3B_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 417
-        width: 97
-        height: 43
+        x: 2
+        y: 2
+        width: 46
+        height: 46
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e59c5dc50b2579546a068e86c4fc0d08
-      internalID: 141251892
+      spriteID: 2dcbede04d9fdc24b96b9ae1538961b4
+      internalID: -519702164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloques3B_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 2
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c217b69a8393b84fa7555876fab1c96
+      internalID: -526158634
       vertices: []
       indices: 
       edges: []
@@ -141,7 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlataformaMovil_2_0: 141251892
+      bloques3B_0: -519702164
+      bloques3B_1: -526158634
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

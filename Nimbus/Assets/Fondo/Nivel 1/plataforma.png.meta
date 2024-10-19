@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1db956aaa6dc6a548b301beadfdfeab7
+guid: 2f28bfcd2e97a6e44acde77750d3cb58
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,22 +110,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlataformaMovil_2_0
+      name: plataforma_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 417
-        width: 97
-        height: 43
+        x: 1
+        y: 3
+        width: 100
+        height: 46
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e59c5dc50b2579546a068e86c4fc0d08
-      internalID: 141251892
+      spriteID: fe2006bf5a2a6a641a2fae1beb735ed3
+      internalID: -1095136227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plataforma_1
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 3
+        width: 146
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7fedaf3fbe999047ba8b9c028834dcb
+      internalID: 1155878253
       vertices: []
       indices: 
       edges: []
@@ -141,7 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlataformaMovil_2_0: 141251892
+      plataforma_0: -1095136227
+      plataforma_1: 1155878253
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
