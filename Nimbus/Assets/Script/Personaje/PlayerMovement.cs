@@ -5,18 +5,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f, jumpForce = 12f, wallSlideSpeed = 2f,stamina = 100f;
+    [SerializeField] private float speedWalk = 5f, jumpForce = 12f, wallSlideSpeed = 2f,stamina = 100f;
     [SerializeField] private LayerMask groundLayer, wallLayer;
     [SerializeField] private Transform groundCheck, wallCheck;
-    
+
+    private ControllerPlayerState controllerPlayerState;
     private Rigidbody2D rb;
-    private float inputHor,speedRun;
+    private float inputHor,inputVer,speedRun,speed;
     private bool facingRight = true; // Saber si el personaje está mirando a la derecha
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        speedRun = speed * 2;
+        speedRun = speedWalk * 2;
+        controllerPlayerState = GetComponent<ControllerPlayerState>();
     }
 
     public void Stop(){
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         inputHor = Input.GetAxisRaw("Horizontal");
+        inputVer = Input.GetAxisRaw("Vertical");
         if(!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.E))
             SetStamina(0.5f);
         Flip();
@@ -54,9 +57,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && stamina > 0)
         {
-            float inputVer = Input.GetAxisRaw("Vertical");
             rb.velocity = new Vector2(rb.velocity.x, inputVer * speed);
             SetStamina(-0.5f);
+            controllerPlayerState.SetState(PlayerState.Climb);
         }
         else
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
@@ -103,11 +106,17 @@ public class PlayerMovement : MonoBehaviour
             SetStamina(-0.5f);
         }
         else
-            speed = 5f;
+            speed = speedWalk;
     }
 
     private void Movement()
     {
+        if(inputHor == 0 && inputVer == 0)
+            controllerPlayerState.SetState(PlayerState.Idle);
+        else if (speed == speedRun)
+            controllerPlayerState.SetState(PlayerState.Run);
+        else
+            controllerPlayerState.SetState(PlayerState.Walk);
         rb.velocity = new Vector2(inputHor * speed, rb.velocity.y);
     }
 }
