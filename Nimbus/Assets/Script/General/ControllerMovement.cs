@@ -8,7 +8,6 @@ public class ControllerMovement : MonoBehaviour
     protected Rigidbody2D rb;
     protected ControllerState controllerAnimState;
     protected float speed, speedRun;
-    protected bool facingRight = true;
 
     protected virtual void Awake()
     {
@@ -22,22 +21,17 @@ public class ControllerMovement : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
 
-    public void Disable(){
+    public void Disable()
+    {
         Stop();
         this.enabled = false;
     }
 
     protected virtual void Flip(bool value)
     {
-        if (value && !facingRight)
-        {
-            facingRight = true;
+        if (value)
             transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        else if (!value && facingRight)
-        {
-            facingRight = false;
+        else if (!value)
             transform.eulerAngles = new Vector3(0, 180, 0);
-        }
     }
 }

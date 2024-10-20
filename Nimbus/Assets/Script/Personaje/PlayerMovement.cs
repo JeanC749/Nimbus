@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -5,9 +6,10 @@ using UnityEngine;
 
 public class PlayerMovement : ControllerMovement
 {
-    [SerializeField] private float jumpForce = 12f, wallSlideSpeed = 2f, stamina = 100f;
+    [SerializeField] private float jumpForce = 12f, wallSlideSpeed = 2f, stamina = 100f,radioGolpe = 5f;
+    [SerializeField] private Vector2 boxSize = new(0.5f, 0.1f);
     [SerializeField] private LayerMask groundLayer, wallLayer;
-    [SerializeField] private Transform groundCheck, wallCheck;
+    [SerializeField] private Transform groundCheck, wallCheck, attackArea;
     private float inputHor, inputVer;
     private void Update()
     {
@@ -15,13 +17,13 @@ public class PlayerMovement : ControllerMovement
         inputVer = Input.GetAxisRaw("Vertical");
         if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.E))
             SetStamina(0.5f);
-        if (inputHor > 0 && !facingRight)
+        if (inputHor > 0)
             Flip(true);
-        else if (inputHor < 0 && facingRight)
+        else if (inputHor < 0)
             Flip(false);
         Run();
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !Input.GetKey(KeyCode.E))
-            Jump();
+        if (Input.GetMouseButtonDown(0))
+            StartAttack();
     }
 
     private void SetStamina(float value)
@@ -35,8 +37,8 @@ public class PlayerMovement : ControllerMovement
     private bool IsTouchingWall()
     {
         // Detectar si estamos tocando una pared en función de la dirección del personaje
-        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
-        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, direction, 0.2f, wallLayer);
+        Vector2 direction = Vector2.right;
+        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, direction, 0.1f, wallLayer);
         return hit.collider != null;
     }
 
@@ -51,10 +53,42 @@ public class PlayerMovement : ControllerMovement
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
     }
 
+    private void StartAttack()
+    {
+        // Si no estamos tocando el suelo, cancelamos el ataque.
+        if (!IsGrounded()) return;
+        controllerAnimState.SetState(AnimationStates.Attack);
+    }
+
+    private void Attack()
+    {
+        // Detecta los objetos dentro del área de ataque
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackArea.position, radioGolpe);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Enemigo"))
+            {
+                collider.GetComponent<ControllerHealth>().TakeDamage(1);
+            }
+        }
+    }
+
+    private void FinishAttack()
+    {
+        controllerAnimState.SetState(AnimationStates.Idle);
+    }
+
     private void FixedUpdate()
     {
+        if (controllerAnimState.States == AnimationStates.Attack)
+        {
+            Stop();
+            return;
+        }
         ManagerState();
         Movement();
+        if (Input.GetKey(KeyCode.Space) && IsGrounded() && !Input.GetKey(KeyCode.E))
+            Jump();
         if (IsTouchingWall())
             Climb();
     }
@@ -62,18 +96,20 @@ public class PlayerMovement : ControllerMovement
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * jumpForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     private bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.1f, groundLayer);
-        return hit.collider != null;
+        // Comprobar si el cuadrado toca alguna capa de suelo o pared
+        bool isTouchingGround = Physics2D.OverlapBox(groundCheck.position, boxSize, 0f, groundLayer);
+        bool isTouchingWall = Physics2D.OverlapBox(groundCheck.position, boxSize, 0f, wallLayer);
+        return isTouchingGround || isTouchingWall;
     }
 
     private void Run()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && stamina > 0)
+        if (Math.Abs(inputHor) > 0 && IsGrounded() && Input.GetKey(KeyCode.LeftShift) && stamina > 0)
         {
             speed = speedRun;
             SetStamina(-0.5f);
@@ -105,5 +141,11 @@ public class PlayerMovement : ControllerMovement
     private void Movement()
     {
         rb.velocity = new Vector2(inputHor * speed, rb.velocity.y);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackArea.position, radioGolpe);
     }
 }

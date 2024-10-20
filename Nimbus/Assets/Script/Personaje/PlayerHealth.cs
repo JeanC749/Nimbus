@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : ControllerHealth
 {
+    [SerializeField] private CameraEffects cameraEffects;
     protected override IEnumerator Die()
     {
         controllerMovement.Disable();
@@ -14,10 +15,10 @@ public class PlayerHealth : ControllerHealth
 
     protected override IEnumerator Hurt()
     {
+        StartCoroutine(cameraEffects.Snake(0.4f, 1f));
         controllerMovement.Stop();
         controllerMovement.enabled = false;
         controllerAnimaState.SetState(AnimationStates.Hurt);
-        yield return new WaitForSeconds(0.3f);
-        controllerAnimaState.SetState(AnimationStates.Idle);
+        yield return new WaitForSeconds(0.4f);
     }
 }

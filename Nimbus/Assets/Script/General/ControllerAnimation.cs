@@ -7,6 +7,8 @@ public class ControllerState : MonoBehaviour
     protected AnimationStates state;
     protected Animator anim;
 
+    public AnimationStates States { get => state; }
+
     private void Awake()
     {
         state = AnimationStates.Idle;
